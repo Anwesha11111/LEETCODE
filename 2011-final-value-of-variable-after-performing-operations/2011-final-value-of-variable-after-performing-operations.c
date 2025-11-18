@@ -7,9 +7,8 @@ int finalValueAfterOperations(char** operations, int operationsSize) {
   if(strcmp(operations[i],"--X")==0||strcmp(operations[i],"X--")==0){
     a--;
   }
-  else if(strcmp(operations[i],"++X")==0||strcmp(operations[i],"X++")==0){
+  else 
     a++;
-  }
 
   }  
 return a;
