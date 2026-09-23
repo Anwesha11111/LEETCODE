@@ -1,17 +1,24 @@
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
 class Solution {
 public:
     int longestCommonSubsequence(string text1, string text2) {
-        int m=text1.size(),n=text2.size();
-        vector<vector<int>>dp(m+1,vector<int>(n+1,-1));
-       for(int i=m-1;i>=0;i--){
-        for(int j=n-1;j>=0;j--){
-            if(text1[i]==text2[j])
-             dp[i][j]=1+dp[i+1][j+1];
-            else
-             dp[i][j]=max(dp[i+1][j],dp[i][j+1]);
-        }
-       }
+        int m = text1.size(), n = text2.size();
+        vector<int> prev(n+1, 0), curr(n+1, 0);
 
-       return 1+dp[0][0];
+        for (int i = m-1; i >= 0; i--) {
+            for (int j = n-1; j >= 0; j--) {
+                if (text1[i] == text2[j]) {
+                    curr[j] = 1 + prev[j+1];
+                } else {
+                    curr[j] = max(prev[j], curr[j+1]);
+                }
+            }
+            prev = curr; 
+        }
+        return prev[0];
     }
 };
